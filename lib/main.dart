@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -12,13 +14,20 @@ class _MyAppState extends State<MyApp> {
   var leftDiceNumber = 2;
   var rightDiceNumber = 3;
 
+  void changeDiceFace() {
+    setState(() {
+      leftDiceNumber = Random().nextInt(6) + 1;
+      rightDiceNumber = Random().nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Center(
+          title: const Center(
             child: Text(
               "D I C E",
             ),
@@ -34,10 +43,7 @@ class _MyAppState extends State<MyApp> {
                   child: TextButton(
                     child: Image.asset("images/dice$leftDiceNumber.png"),
                     onPressed: () {
-                      setState(() {
-                        leftDiceNumber = Random().nextInt(6) + 1;
-                        rightDiceNumber = Random().nextInt(6) + 1;
-                      });
+                      changeDiceFace();
                     },
                   ),
                 ),
@@ -48,10 +54,7 @@ class _MyAppState extends State<MyApp> {
                   child: TextButton(
                     child: Image.asset("images/dice$rightDiceNumber.png"),
                     onPressed: () {
-                      setState(() {
-                        leftDiceNumber = Random().nextInt(6) + 1;
-                        rightDiceNumber = Random().nextInt(6) + 1;
-                      });
+                      changeDiceFace();
                     },
                   ),
                 ),
